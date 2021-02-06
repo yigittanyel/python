@@ -5,11 +5,95 @@ print(a.dtype) #data tipini verir
 print(a.ndim) #arrayin boyutunu verir
  
 
+#%% SLICING
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7])
+
+print(arr[1:5:2]) #2 4
+print(arr[::2])   # 1 3 5 7
+
+#%% VERİ TÜRÜ DÖNÜŞÜMÜ
+import numpy as np
+
+arr = np.array([1.1, 2.1, 3.1])
+
+newarr = arr.astype('i')
+
+print(newarr)
+print(newarr.dtype)
+
+#%% DİZİLERİ DÜZLEŞTİRME / YENİDEN BOYUTLANDIRMA
+import numpy as np
+
+arr = np.array([[1, 2, 3], [4, 5, 6]])
+
+newarr = arr.reshape(-1)
+
+print(newarr)
+print("---------------------")
+arr = np.array([1, 2, 3, 4, 5, 6, 7, 8])
+newarr = arr.reshape(2, 2, -1) #bilinmeyen boyut.
+print(newarr)
+
+#%% FOR İLE DİZİLERİ GÖRÜNTÜLEMEK
+import numpy as np
+
+arr = np.array([[1, 2, 3], [4, 5, 6]])
+
+for x in arr:
+  print(x)
+
+print("---------------")
+for x in arr:
+    for y in x:
+        print(y)
+        
+#Bu da iç içe döngünün aynısını yapar:
+arr4 = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])
+
+for x in np.nditer(arr4):
+  print(x)
+  
+# arr = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
+# for x in np.nditer(arr[:, ::2]):
+#   print(x)  BURASI DA BİRLEŞTİRİR nditer ile ondan sonra da çıktı olarak 1 3 5 7 döner.
+
+#NUMARALANDIRILMIŞ YİNELEME
+arr5 = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
+
+for idx, x in np.ndenumerate(arr5):
+  print(idx, x)
+
+
+#%% COPY / VİEW
+#view yapılan değişiklikten etkilenirken copy etkilenmez.
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5])
+x = arr.copy()
+b=arr.view()
+arr[0] = 42
+
+print(arr) # [42  2  3  4  5]
+print(x)   # [1 2 3 4 5]
+print(b)   #[42  2  3  4  5]
+print("--------------------")
+print(x.base) #copy
+print(b.base) #view
+#EĞER NONE DONERSE COPY DİZİNİN KENDİSİ DONERSE VİEW'dir.
+
 #%% RESHAPE SHAPE
-print(a.shape) #2,3 yazar.
 a1=np.array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
 a1=a1.reshape(3,5)
 print(a1)
+
+print("--------------")
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+
+newarr = arr.reshape(2, 3, 2) #2 tane 3 satır 2 sutun dizi yap 3 boyutlu.
+print(newarr)
 
 #%% ARANGE LİNSPACE
 a2=np.arange(0,20,5)
@@ -148,12 +232,86 @@ a4=np.hstack((a1,a2)) #HORIZONTAL(YATAY)
 print(a3)
 print(a4)
 
+#%% SPLIT ile diziyi bölme
+import numpy as np
 
+arr = np.array([1, 2, 3, 4, 5, 6])
 
+newarr = np.array_split(arr, 4)
 
+print(newarr)  #  [array([1, 2]), array([3, 4]), array([5]), array([6])]
 
+#%% WHERE KOMUTU
+import numpy as np
 
+arr = np.array([1, 2, 3, 4, 5, 6, 7, 8])
 
+x = np.where(arr%2 == 0) #1 3 5 7
+
+print(x)
+
+        
+#%% SEARCH SORTED ile sıralamada nereye gelmesi gerektiği.
+import numpy as np
+
+arr = np.array([6, 2, 9, 7])
+
+x = np.searchsorted(arr, 7) #2
+
+print(x)
+
+#%% SORT KOMUTU İLE SIRALAMA
+import numpy as np
+
+arr = np.array([3, 2, 0, 1])
+
+print(np.sort(arr))
+
+arr2 = np.array([True, False, True])
+
+print(np.sort(arr2)) #FALSE TRUE TRUE
+
+#%% FILTRE
+import numpy as np
+arr = np.array([41, 42, 43, 44])
+filter_arr = []
+for element in arr:
+  if element > 42:
+    filter_arr.append(True)
+  else:
+    filter_arr.append(False)
+
+newarr = arr[filter_arr]
+
+print(filter_arr)
+print(newarr)
+
+print("---------------------------")
+
+arr2 = np.array([1, 2, 3, 4, 5, 6, 7])
+
+filter_arr = []
+
+for element in arr2:
+  if element % 2 == 0:
+    filter_arr.append(True)
+  else:
+    filter_arr.append(False)
+
+newarr = arr2[filter_arr]
+
+print(filter_arr)
+print(newarr)
+print("-------------------")
+
+arr3 = np.array([41, 42, 43, 44])
+
+filter_arr = arr3 > 42
+
+newarr = arr3[filter_arr]
+
+print(filter_arr)
+print(newarr)
 
 
 
