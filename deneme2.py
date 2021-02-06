@@ -1,7 +1,10 @@
-a = [1,2,3]
+import pandas as pd
 
-for i in a:
+dictionary = {"NAME":["ali","veli","kenan","hilal","ayse","evren"],
 
-    i+1
+              "AGE":[15,16,17,33,45,66],
 
-print(a)
+              "MAAS": [100,150,240,350,110,220]}
+
+dataFrame1 = pd.DataFrame(dictionary)
+print(dataFrame1.describe())
