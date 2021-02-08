@@ -13,6 +13,21 @@ arr = np.array([1, 2, 3, 4, 5, 6, 7])
 print(arr[1:5:2]) #2 4
 print(arr[::2])   # 1 3 5 7
 
+#%% INDEXING SLICING REVERSE ARRAY
+a1=np.array([1,2,3,4,5,6,7])
+print(a1[0:3])
+
+a2=np.array([[1,2,3],
+             [4,5,6],
+             [7,8,9]])
+
+reverse_array=a1[::-1]
+print(reverse_array)
+
+print("Yaz: \n",a2[:,0:2]) #satırların hepsi sutunlardan ılk ikisi
+
+#SON SATIR -> print(-1,:)
+#SON SUTUN -> print(:,-1)
 #%% VERİ TÜRÜ DÖNÜŞÜMÜ
 import numpy as np
 
@@ -35,7 +50,26 @@ print("---------------------")
 arr = np.array([1, 2, 3, 4, 5, 6, 7, 8])
 newarr = arr.reshape(2, 2, -1) #bilinmeyen boyut.
 print(newarr)
+#%% RESHAPE SHAPE
+a1=np.array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
+a1=a1.reshape(3,5)
+print(a1)
 
+print("--------------")
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+
+newarr = arr.reshape(2, 3, 2) #2 tane 3 satır 2 sutun dizi yap 3 boyutlu.
+print(newarr)
+
+#%%MATRİSİ DÜZ HALE GETİRME - 
+
+a2=np.array([[1,2,3],
+             [4,5,6],
+             [7,8,9]])
+a=a2.ravel()
+print(a)
+#ESKİ HAL -> a3=a.reshape(3,3)
 #%% FOR İLE DİZİLERİ GÖRÜNTÜLEMEK
 import numpy as np
 
@@ -62,7 +96,7 @@ for x in np.nditer(arr4):
 #NUMARALANDIRILMIŞ YİNELEME
 arr5 = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
 
-for idx, x in np.ndenumerate(arr5):
+for idx, x in np.ndenumerate(arr5): #(0, 0) 1 (0,1) 2 vs.
   print(idx, x)
 
 
@@ -83,29 +117,18 @@ print(x.base) #copy
 print(b.base) #view
 #EĞER NONE DONERSE COPY DİZİNİN KENDİSİ DONERSE VİEW'dir.
 
-#%% RESHAPE SHAPE
-a1=np.array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
-a1=a1.reshape(3,5)
-print(a1)
-
-print("--------------")
-
-arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
-
-newarr = arr.reshape(2, 3, 2) #2 tane 3 satır 2 sutun dizi yap 3 boyutlu.
-print(newarr)
 
 #%% ARANGE LİNSPACE
-a2=np.arange(0,20,5)
+a2=np.arange(0,20,5) #0 5 10 15 20 DAHİL DEĞİL!
 print(a2)
 a2=np.linspace(11,30, 14)
 print(a2)
 
 #%% RANDOM
-a3=np.random.randint(10,size=15)
+a3=np.random.randint(12,size=15) #max 12 olacak şekilde 15 random sayı
 print(a3)
 
-a4=np.random.random((3,2))
+a4=np.random.random((3,2)) #3 satır 2 sutun
 print(a4)
 
 #%% SATIR - SÜTUN ELEMANLARA ERİŞME
@@ -122,13 +145,13 @@ ilk_iki_sutun=a1[:,0:2]
 print(ilk_iki_sutun)
 
 #%%ZEROS-ONES  - EYE(BİRİM)
-a4=np.zeros((2,3))
+a4=np.zeros((2,3)) #0 0 0
 print(a4)
 print("-----------")
-a5=np.ones((2,3))
+a5=np.ones((2,3)) #1 1 1 
 print(a5)
 print("-----------")
-a6=np.eye(3)
+a6=np.eye(3) #birim matris
 print(a6)
 
 #%%CONCANATE BİRLEŞTİRME
@@ -141,6 +164,17 @@ a8=np.array([[7,8,9],
 a9=np.concatenate([a7,a8]) #,axis=1 yaparsak yan yana birleştirir.
 print(a9)
 
+#%%   ARRAY BİRLEŞTİRME
+a1=np.array([[1,2,3],
+            [4,5,6]])
+a2=np.array([[7,8,9],
+             [10,11,12]])
+
+a3=np.vstack((a1,a2)) #VERTICAL(DIKEY)   #axis=0 gibi işlem görür.
+a4=np.hstack((a1,a2)) #HORIZONTAL(YATAY) #axis=1 gibi işlem görür.
+print(a3)
+print("--------------------------")
+print(a4)
 #%%MAX MİN SUM MEAN(ORT) STANDART SAPMA VARYANS EXP
 a1=np.array([[1,2,3,4,5],
              [6,7,8,9,10],
@@ -182,62 +216,16 @@ carpim=np.dot(a1,a2) #a.dot(b.T) de olurdu.
 transpoz=a1.T
 print(carpim)
 print(transpoz)
-
-#%%KOŞULLAR
-a1=np.array([[1,2,3],
-            [4,5,6]])
-kosul=a1>3
-print(kosul)
-hangileri_buyuk=a1[a1>3]
-print(hangileri_buyuk)
-
 #%%KAYDETMEK
 a1=np.array([[1,2,3],
             [4,5,6]])
 np.save("save",a1)
-
-#%% INDEXING SLICING REVERSE ARRAY
-a1=np.array([1,2,3,4,5,6,7])
-print(a1[0:3])
-
-a2=np.array([[1,2,3],
-             [4,5,6],
-             [7,8,9]])
-
-reverse_array=a1[::-1]
-print(reverse_array)
-
-print("Yaz: \n",a2[:,0:2]) #satırların hepsi sutunlardan ılk ikisi
-
-#SON SATIR -> print(-1,:)
-#SON SUTUN -> print(:,-1)
-
-#%%MATRİSİ DÜZ HALE GETİRME - 
-
-a2=np.array([[1,2,3],
-             [4,5,6],
-             [7,8,9]])
-a=a2.ravel()
-print(a)
-#ESKİ HAL -> a3=a.reshape(3,3)
-
-#%%   ARRAY BİRLEŞTİRME
-a1=np.array([[1,2,3],
-            [4,5,6]])
-a2=np.array([[7,8,9],
-             [10,11,12]])
-
-a3=np.vstack((a1,a2)) #VERTICAL(DIKEY)
-a4=np.hstack((a1,a2)) #HORIZONTAL(YATAY)
-print(a3)
-print(a4)
-
 #%% SPLIT ile diziyi bölme
 import numpy as np
 
 arr = np.array([1, 2, 3, 4, 5, 6])
 
-newarr = np.array_split(arr, 4)
+newarr = np.array_split(arr, 5)
 
 print(newarr)  #  [array([1, 2]), array([3, 4]), array([5]), array([6])]
 
@@ -270,6 +258,14 @@ print(np.sort(arr))
 arr2 = np.array([True, False, True])
 
 print(np.sort(arr2)) #FALSE TRUE TRUE
+
+#%%KOŞULLAR
+a1=np.array([[1,2,3],
+            [4,5,6]])
+kosul=a1>3
+print(kosul)
+hangileri_buyuk=a1[a1>3]
+print(hangileri_buyuk)
 
 #%% FILTRE
 import numpy as np

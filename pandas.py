@@ -49,13 +49,13 @@ dictionary = {"NAME":["ali","veli","kenan","hilal","ayse","evren"],
 
               "MAAS": [100,150,240,350,110,220]}
 
-dataFrame1 = pd.DataFrame(dictionary)
+dataFr = pd.DataFrame(dictionary)
 
-print(dataFrame1.loc[3, ["AGE","NAME"]]) #age 33 name hilal 
+print(dataFr.loc[3, ["AGE","NAME"]]) #age 33 name hilal 
 
 #FILTERING / KOSULLAR
-a=dataFr.Salary>200 
-b= dataFr.Age<25
+a=dataFr.MAAS>200 
+b= dataFr.AGE<25
 print("Filtrelenmiş data:\n",dataFr[a & b])
 
 
@@ -73,7 +73,7 @@ dataFr["arada bosluk"]=[1,4,7,8,6,8]
 dataFr.columns = [each.split()[0]+"_"+each.split()[1] if(len(each.split())>1) else each for each in dataFr.columns]
 
 
-#%% DROP VE CONCATENATE
+#%% DROP VE CONCATENATE + VERTICAL/HORIZANTAL
 dataFr.columns=[each.lower() for each in dataFr.columns]
 #dataFr.drop(["maas_seviyesi"],axis=1,inplace=True)
 #dataFr.drop(["arada_bosluk"],axis=1,inplace=True)
@@ -141,4 +141,4 @@ data = {
 
 df = pd.DataFrame(data)
 
-print(df) 
+print(df.iloc[2]) 
